@@ -7,7 +7,7 @@ const showMessage = (req, res) => {
 };
 
 const getTime = (req, res) => {
-    res.send(moment().format('LLLL'));
+    res.send(`${moment().format('LLLL')}, this a test`);
 };
 
 const envVars = (req, res) => {
