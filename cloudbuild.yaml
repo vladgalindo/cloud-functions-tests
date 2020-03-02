@@ -1,11 +1,8 @@
-- name: 'gcr.io/cloud-builders/gcloud'
-args:
-  — functions
-  — deploy
-  — — runtime=nodejs10
-  — — trigger-http
-  — — entry-point=showMessage # Function entry point
-  — vladsFirstCloudF # Function name
-waitFor: ['_']
 id: 'deploying-vlads-cloud-functions'
-
+steps:
+  - name: 'gcr.io/cloud-builders/yarn'
+    args: ['install']
+    dir: 'src'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['functions', 'deploy', 'vladsFirstCloudF', 'trigger-http', '--runtime', 'nodejs10', '--entry-point', 'showMessage']
+    dir: 'src'
