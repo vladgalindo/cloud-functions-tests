@@ -1,8 +1,4 @@
 id: 'deploying-vlads-cloud-functions'
 steps:
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['install']
-    dir: 'src'
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'vladsFirstCloudF', '--trigger-http', '--runtime', 'nodejs10', '--entry-point', 'showMessage']
-    dir: 'src'
