@@ -2,3 +2,5 @@ id: 'deploying-vlads-cloud-functions'
 steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'vladsFirstCloudF', '--trigger-http', '--runtime', 'nodejs10', '--entry-point', 'showMessage']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['functions', 'deploy', 'cfGetFormatTime', '--trigger-http', '--runtime', 'nodejs10', '--entry-point', 'getTime']
