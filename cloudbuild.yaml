@@ -4,5 +4,5 @@ steps:
     args: ['install']
     dir: 'src'
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['functions', 'deploy', 'vladsFirstCloudF', 'trigger-http', '--runtime', 'nodejs10', '--entry-point', 'showMessage']
+    args: ['functions', 'deploy', 'vladsFirstCloudF', '--trigger-http', '--runtime', 'nodejs10', '--entry-point', 'showMessage']
     dir: 'src'
