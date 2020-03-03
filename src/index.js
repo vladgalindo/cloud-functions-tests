@@ -2,8 +2,10 @@ const moment = require('moment');
 const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 
 const showMessage = (req, res) => {
-    const message = `your message is: ${req.body.msg}, i'm getting deployed automatically`;
-    console.log(req);
+    const message = `your message is: ${req.body.msg}, i'm getting deployed automatically
+    
+    ${JSON.stringify(req)}
+    `;
     res.send(message)
 };
 
