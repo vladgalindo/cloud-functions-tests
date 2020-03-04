@@ -4,3 +4,6 @@ steps:
     args: ['functions', 'deploy', 'vladsFirstCloudF', '--trigger-http', '--runtime', 'nodejs10', '--entry-point', 'showMessage']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'cfGetFormatTime', '--trigger-http', '--runtime', 'nodejs10', '--entry-point', 'getTime']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['functions', 'deploy', 'listAllSecrets', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
+           'getSecrets']
