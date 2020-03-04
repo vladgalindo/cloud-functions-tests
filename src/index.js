@@ -34,7 +34,7 @@ const getSecrets = async (req, res) => {
 };
 
 const getSecretVersion = async (req, res) => {
-    const PROJECT = `projects/cloud-function-test-269618/${req.body.secret}/versions/${req.body.version}`;
+    const PROJECT = `projects/cloud-function-test-269618/secrets/${req.body.secret}/versions/${req.body.version}`;
     const client = new SecretManagerServiceClient();
 
     const [version] = await client.accessSecretVersion({
