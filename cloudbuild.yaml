@@ -7,3 +7,6 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'listAllSecrets', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
            'getSecrets']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['functions', 'deploy', 'fetchSecretVersion', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
+           'getSecretVersion']

@@ -31,17 +31,20 @@ const getSecrets = async (req, res) => {
     });
 
     res.send(secrets);
+};
 
+const getSecretVersion = async (req, res) => {
+    const PROJECT = `projects/cloud-function-test-269618/${req.body.secret}/${req.body.version}`;
+    const client = new SecretManagerServiceClient();
 
-    /*// Access the secret.
-    const [accessResponse] = await client.accessSecretVersion({
-        name: 'my-secret',
+    const [version] = await client.accessSecretVersion({
+        name: PROJECT,
     });
 
-    const responsePayload = accessResponse.payload.data.toString('utf8');
-    const message = `Payload: ${responsePayload}`;
-    console.info(message);
-    res.send(message);*/
+    const payload = version.payload.data.toString('utf8');
+
+    console.info(`Payload: ${payload}`);
+    res.send(`${req.body.secret} - version ${req.body.version} - Payload: ${payload}`);
 };
 
 module.exports = {
