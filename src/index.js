@@ -52,4 +52,5 @@ module.exports = {
     getTime,
     envVars,
     getSecrets,
+    getSecretVersion,
 };
