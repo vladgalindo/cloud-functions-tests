@@ -21,4 +21,4 @@ steps:
            'getSecretVersion']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'showEnvVars', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
-             'envVars', '--set-env-vars', 'API_KEY=[API_KEY],EMAIL_PASS=[EMAIL_PASS]']
+             'envVars', '--set-env-vars', 'API_KEY=$$API_KEY,EMAIL_PASS=$$EMAIL_PASS']
