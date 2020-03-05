@@ -1,5 +1,14 @@
 id: 'deploying-vlads-cloud-functions'
 steps:
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - kms
+      - decrypt
+      - --ciphertext-file=.env.enc
+      - --plaintext-file=.env
+      - --location=global
+      - --keyring=ci-secrets
+      - --key=env-dev-secrets
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'vladsFirstCloudF', '--trigger-http', '--runtime', 'nodejs10', '--entry-point', 'showMessage']
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -10,3 +19,6 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'fetchSecretVersion', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
            'getSecretVersion']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['functions', 'deploy', 'showEnvVars', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
+             'envVars', '--set-env-vars', 'API_KEY=[API_KEY],EMAIL_PASS=[EMAIL_PASS]']
