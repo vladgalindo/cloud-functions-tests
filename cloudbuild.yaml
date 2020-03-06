@@ -4,8 +4,8 @@ steps:
     args:
       - kms
       - decrypt
-      - --ciphertext-file=.env.enc
-      - --plaintext-file=.env
+      - --ciphertext-file=dev-secrets.json.enc
+      - --plaintext-file=dev-secrets.json
       - --location=global
       - --keyring=ci-secrets
       - --key=env-dev-secrets
