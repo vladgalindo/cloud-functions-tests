@@ -90,4 +90,6 @@ typings/
 #IDE's
 .idea
 
+dev.env.yaml
+
 dev-secrets.json
