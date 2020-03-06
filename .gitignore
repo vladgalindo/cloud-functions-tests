@@ -92,4 +92,5 @@ typings/
 
 dev.env.yaml
 
-dev-secrets.json
+# GIT
+.git
