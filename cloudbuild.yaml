@@ -21,4 +21,4 @@ steps:
            'getSecretVersion']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'showEnvVars', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
-             'envVars', '--set-env-file', './dev.env.yaml']
+             'envVars', '--env-vars-file', './dev.env.yaml']
