@@ -1,7 +1,6 @@
 const moment = require('moment');
 const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 const fireFunctions = require('firebase-functions');
-const fireAdmin = require('firebase-admin');
 const firebase = require('firebase');
 const { firebaseConfig } = require('./firebase.config');
 const cors = require('cors')({ origin: true });
