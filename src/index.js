@@ -4,7 +4,7 @@ const fireFunctions = require('firebase-functions');
 const fireAdmin = require('firebase-admin');
 const cors = require('cors')({ origin: true });
 
-fireAdmin.initializeApp(fireFunctions.config().firebase);
+fireAdmin.initializeApp();
 
 const actionCodeSettings = {
     url: 'https://www.example.com/finishSignUp?cartId=1234',
