@@ -100,9 +100,11 @@ const sendLoginLink = (req, res) => {
     fireAdmin.auth().generateSignInWithEmailLink(req.body.email, actionCodeSettings)
         .then(function() {
             window.localStorage.setItem('emailForSignIn', req.body.email);
+            res.send(`'emailForSignIn', ${req.body.email}`)
         })
         .catch(function(error) {
             console.log(error);
+            res.error(error)
         });
 
 };
