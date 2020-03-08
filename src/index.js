@@ -97,7 +97,7 @@ const authTest = fireFunctions.https.onRequest((req, res) => {
 
 
 const sendLoginLink = (req, res) => {
-    fireAdmin.auth().sendSignInLinkToEmail(req.body.email, actionCodeSettings)
+    fireAdmin.auth().generateSignInWithEmailLink(req.body.email, actionCodeSettings)
         .then(function() {
             window.localStorage.setItem('emailForSignIn', req.body.email);
         })
