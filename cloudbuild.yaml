@@ -17,8 +17,11 @@ steps:
     args: ['functions', 'deploy', 'listAllSecrets', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
            'getSecrets']
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['functions', 'deploy', 'fetchSecretVersion', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
-           'getSecretVersion']
-  - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'showEnvVars', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
              'envVars', '--env-vars-file', './dev.env.yaml']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['functions', 'deploy', 'loginByLink', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
+           'sendLoginLink']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['functions', 'deploy', 'checkAuth', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
+             'authTest']
