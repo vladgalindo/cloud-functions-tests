@@ -2,17 +2,11 @@ const moment = require('moment');
 const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 const fireFunctions = require('firebase-functions');
 const fireAdmin = require('firebase-admin');
+const firebase = require('firebase');
+const { firebaseConfig } = require('./firebase.config');
 const cors = require('cors')({ origin: true });
 
-fireAdmin.initializeApp();
-
-const actionCodeSettings = {
-    url: 'https://www.example.com/finishSignUp?cartId=1234',
-    // This must be true.
-    handleCodeInApp: true,
-    dynamicLinkDomain: 'example.page.link'
-};
-
+firebase.initializeApp(firebaseConfig);
 
 const showMessage = (req, res) => {
     const message = `your message is: ${req.body.msg}, i'm getting deployed automatically
@@ -69,13 +63,13 @@ function validateToken(req) {
 }
 
 function decodedAuthToken(token) {
-    return fireAdmin.auth()
+    return firebase.auth()
         .verifyIdToken(token)
         .then(decodedToken => decodedToken)
 }
 
 const authTest = fireFunctions.https.onRequest((req, res) => {
-    cors(async (req, res) => {
+    return cors(req, res, async () => {
         const reqUid = req.body.uid;
         const authToken = validateToken(req);
 
@@ -97,16 +91,31 @@ const authTest = fireFunctions.https.onRequest((req, res) => {
 
 
 const sendLoginLink = (req, res) => {
-    fireAdmin.auth().generateSignInWithEmailLink(req.body.email, actionCodeSettings)
+    const actionCodeSettings = {
+        url: 'https://cloud-function-test-269618.firebaseapp.com/finishSignUp?uid=1234'
+    };
+    firebase.auth().generateSignInWithEmailLink(req.body.email, actionCodeSettings)
         .then(function() {
             window.localStorage.setItem('emailForSignIn', req.body.email);
             res.send(`'emailForSignIn', ${req.body.email}`)
         })
         .catch(function(error) {
             console.log(error);
-            res.error(error)
+            res.status(400).send(error)
         });
+};
 
+const userLogin = (req, res) => {
+    const { email, password } = req.body;
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userData) => {
+            res.send(`'userData', ${JSON.stringify(userData)}`)
+        })
+        .catch((error) => {
+            // Handle Errors here.
+            console.log(error);
+            res.status(400).send(error)
+        });
 };
 
 module.exports = {
@@ -116,4 +125,5 @@ module.exports = {
     getSecrets,
     authTest,
     sendLoginLink,
+    userLogin,
 };

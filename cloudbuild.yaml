@@ -25,3 +25,6 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'checkAuth', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
              'authTest']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['functions', 'deploy', 'userLogin', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
+             'userLogin']
