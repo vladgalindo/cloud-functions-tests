@@ -54,9 +54,9 @@ const getSecrets = async (req, res) => {
 };*/
 
 function validateToken(req) {
-    if(req.header.authorization && req.header.authorization.startsWith('Bearer ')) {
-        console.log(`Token is ${req.header.authorization}`);
-        return req.header.authorization.split('Bearer ')[1];
+    if(req.header('Authorization') && req.header('Authorization').startsWith('Bearer ')) {
+        console.log(`Token is ${req.header('Authorization')}`);
+        return req.header('Authorization').split('Bearer ')[1];
     }
     return false;
 }
@@ -68,12 +68,13 @@ function decodedAuthToken(token) {
 }
 
 const authTest = fireFunctions.https.onRequest((req, res) => {
+
     return cors(req, res, async () => {
         const reqUid = req.body.uid;
         const authToken = validateToken(req);
 
         if(!authToken) {
-            res.status(403).send('Unauthtorize!!! missing token');
+            res.status(403).send(`Unauthtorize!!! missing token ${req.header}`);
         }
 
         const decodedAuthToken = await decodedAuthToken(authToken);
