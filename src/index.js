@@ -1,11 +1,13 @@
 const moment = require('moment');
 const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');
 const fireFunctions = require('firebase-functions');
+const fireAdmin = require('firebase-admin');
 const firebase = require('firebase');
 const { firebaseConfig } = require('./firebase.config');
 const cors = require('cors')({ origin: true });
 
 firebase.initializeApp(firebaseConfig);
+fireAdmin.initializeApp(firebaseConfig);
 
 const showMessage = (req, res) => {
     const message = `your message is: ${req.body.msg}, i'm getting deployed automatically
@@ -62,7 +64,7 @@ function validateToken(req) {
 }
 
 function decodedAuthToken(token) {
-    return firebase.auth()
+    return fireAdmin.auth()
         .verifyIdToken(token)
         .then(decodedToken => decodedToken)
 }
@@ -77,11 +79,11 @@ const authTest = fireFunctions.https.onRequest((req, res) => {
             res.status(403).send(`Unauthtorize!!! missing token ${req.header}`);
         }
 
-        const decodedAuthToken = await decodedAuthToken(authToken);
-        console.log(decodedAuthToken);
+        const decodedToken = await decodedAuthToken(authToken);
+        console.log(decodedToken);
 
-        if(decodedAuthToken.uid === reqUid) {
-            res.status(200).send(decodedAuthToken);
+        if(decodedToken.uid === reqUid) {
+            res.status(200).send(decodedToken);
         } else {
             res.status(403).send('Unauthorize!!! invalid user')
         }

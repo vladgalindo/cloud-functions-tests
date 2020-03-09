@@ -1,12 +1,12 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyB1PyK7Fcp_PTEW6LpvfO4niblZtK18hPg",
-    authDomain: "cloud-function-test-269618.firebaseapp.com",
-    databaseURL: "https://cloud-function-test-269618.firebaseio.com",
-    projectId: "cloud-function-test-269618",
-    storageBucket: "cloud-function-test-269618.appspot.com",
-    messagingSenderId: "244845385320",
-    appId: "1:244845385320:web:24bac8cb4713a91f078ddd",
-    measurementId: "G-JCN0FEQ0VJ"
+    apiKey: process.env['FIRE_APIKEY'],
+    authDomain: process.env['FIRE_AUTHDOMAIN'],
+    databaseURL: process.env['FIRE_DATABASEURL'],
+    projectId: process.env['FIRE_PROJECTID'],
+    storageBucket: process.env['FIRE_STORAGEBUCKET'],
+    messagingSenderId: process.env['FIRE_MESSAGINGSENDERID'],
+    appId: process.env['FIRE_APPID'],
+    measurementId: process.env['FIRE_MEASUREMENTID'],
 };
 
 module.exports = {
