@@ -21,10 +21,10 @@ steps:
              'envVars', '--env-vars-file', './dev.env.yaml']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'loginByLink', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
-           'sendLoginLink']
+           'sendLoginLink', '--env-vars-file', './dev.env.yaml']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'checkAuth', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
-             'authTest']
+             'authTest', '--env-vars-file', './dev.env.yaml']
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['functions', 'deploy', 'userLogin', '--trigger-http', '--runtime', 'nodejs10', '--entry-point',
-             'userLogin']
+             'userLogin', '--env-vars-file', './dev.env.yaml']
